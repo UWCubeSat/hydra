@@ -190,9 +190,17 @@ dependencies = [
  "cortex-m-rt",
  "embedded-hal 0.2.7",
  "heapless",
+ "hydra-core",
  "nb 1.1.0",
  "panic-halt",
  "stm32f4xx-hal",
+]
+
+[[package]]
+name = "hydra-core"
+version = "0.1.0"
+dependencies = [
+ "heapless",
 ]
 
 [[package]]

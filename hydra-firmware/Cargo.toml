@@ -3,7 +3,11 @@ name = "hydra"
 version = "0.1.0"
 edition = "2021"
 
+[bin]
+test = false
+
 [dependencies]
+hydra-core = { version = "0.1", path = "../hydra-core" }
 embedded-hal = "0.2"
 nb = "1"
 cortex-m = "0.7"

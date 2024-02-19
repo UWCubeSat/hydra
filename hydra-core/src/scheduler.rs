@@ -1,10 +1,10 @@
-use heapless::{binary_heap::Min, BinaryHeap, Vec};
 use super::task::Task;
+use heapless::{binary_heap::Min, BinaryHeap, Vec};
 
 pub const MAX_TASKS: usize = 64;
-pub type Chord = Vec<Task, MAX_TASKS>;
 
-type TaskHeap = BinaryHeap<Task, Min, 64>;
+pub type Chord = Vec<Task, MAX_TASKS>;
+type TaskHeap = BinaryHeap<Task, Min, MAX_TASKS>;
 
 pub struct Scheduler {
     tasks: TaskHeap,

@@ -1,8 +1,6 @@
 #![no_main]
 #![no_std]
 
-mod hydra_core;
-
 use crate::hal::prelude::*;
 use cortex_m_rt::entry;
 use hal::pac::Peripherals;
