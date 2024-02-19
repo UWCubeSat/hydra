@@ -1,5 +1,5 @@
-use core::cmp;
 use core::cmp::Ordering;
+use core::{cmp, usize};
 
 use super::state::State;
 
@@ -10,7 +10,7 @@ pub fn true_predicate(_: &Task) -> bool {
 
 #[derive(Debug, Clone, Eq, PartialEq, PartialOrd)]
 pub struct Task {
-    pub id: usize,
+    pub name: &'static str,
     pub state: State,
     priority: usize,
     pub last_ran: usize,
@@ -30,8 +30,10 @@ impl Ord for Task {
 }
 
 impl Task {
+    pub const DEFAULT_PRIORITY: usize = usize::MAX;
+
     pub const fn new(
-        id: usize,
+        name: &'static str,
         priority: usize,
         state: State,
         predicate: fn(&Task) -> bool,
@@ -39,7 +41,7 @@ impl Task {
         func: fn(&mut Task),
     ) -> Self {
         Task {
-            id,
+            name,
             priority,
             predicate,
             func,
