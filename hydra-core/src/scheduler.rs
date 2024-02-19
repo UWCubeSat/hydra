@@ -35,6 +35,7 @@ impl Scheduler {
                     }
 
                     task.execute();
+                    task.last_ran += 1;
                     next_tasks.push(task).unwrap();
                     break;
                 }
