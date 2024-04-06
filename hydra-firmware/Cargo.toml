@@ -10,7 +10,7 @@ nb = "1"
 cortex-m = "0.7"
 cortex-m-rt = "0.7"
 panic-halt = "0.2"
-heapless = "0.8.0"
+heapless = { git = "https://github.com/mistermuki/heapless.git", branch = "main" } 
 
 [dependencies.stm32f4xx-hal]
 version = "0.18.0"
