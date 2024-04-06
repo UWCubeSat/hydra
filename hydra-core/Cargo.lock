@@ -20,7 +20,7 @@ dependencies = [
 [[package]]
 name = "heapless"
 version = "0.8.0"
-source = "git+https://github.com/mistermuki/heapless.git?branch=main#b5b12a52b3249cef534e9e0579a2030f72f49294"
+source = "git+https://github.com/mistermuki/heapless.git?branch=main#005abbc4e66d1db0674364a8107649f681235437"
 dependencies = [
  "hash32",
  "stable_deref_trait",
