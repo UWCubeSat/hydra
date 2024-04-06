@@ -15,7 +15,7 @@ const TASK_LED_TOGGLE: Task = Task::new(
     0,
     State::BoolState(false),
     true_predicate,
-    |t: &mut Task| match t.state {
+    |t: &mut Task, _| match t.state {
         State::BoolState(led_state) => {
             let p = unsafe { Peripherals::steal() };
             let gpioa = p.GPIOA.split();

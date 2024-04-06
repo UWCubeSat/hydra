@@ -1,10 +1,12 @@
 use core::cmp::Ordering;
 use core::{cmp, usize};
 
+use crate::scheduler::QueueMap;
+
 use super::state::State;
 
 #[inline(always)]
-pub fn true_predicate(_: &Task) -> bool {
+pub fn true_predicate(_: &Task, _: &QueueMap) -> bool {
     true
 }
 
@@ -14,8 +16,8 @@ pub struct Task {
     pub state: State,
     priority: usize,
     pub last_ran: usize,
-    predicate: fn(&Task) -> bool,
-    func: fn(&mut Task) -> (),
+    predicate: fn(&Task, &QueueMap) -> bool,
+    func: fn(&mut Task, &mut QueueMap) -> (),
 }
 
 impl Ord for Task {
@@ -36,9 +38,9 @@ impl Task {
         name: &'static str,
         priority: usize,
         state: State,
-        predicate: fn(&Task) -> bool,
+        predicate: fn(&Task, &QueueMap) -> bool,
         // Tasks can mutate themselves...
-        func: fn(&mut Task),
+        func: fn(&mut Task, &mut QueueMap),
     ) -> Self {
         Task {
             name,
@@ -51,12 +53,12 @@ impl Task {
     }
 
     /// Runs the predicate and return the given value.
-    pub fn confirm(&self) -> bool {
-        (self.predicate)(self)
+    pub fn confirm(&self, queues: &QueueMap) -> bool {
+        (self.predicate)(self, queues)
     }
 
     /// Executes the given Task!
-    pub fn execute(&mut self) -> () {
-        (self.func)(self)
+    pub fn execute(&mut self, queues: &mut QueueMap) -> () {
+        (self.func)(self, queues)
     }
 }
