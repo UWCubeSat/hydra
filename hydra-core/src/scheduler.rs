@@ -1,5 +1,5 @@
 use super::task::Task;
-use heapless::{binary_heap::Min, mpmc::MpMcQueue, BinaryHeap, LinearMap, Vec};
+use heapless::{binary_heap::Min, mpmc::MpMcQueue, BinaryHeap, FnvIndexMap, Vec};
 
 pub const MAX_TASKS: usize = 64;
 pub const MAX_QUEUES: usize = 64;
@@ -8,7 +8,7 @@ pub const MAX_QUEUE_MESSAGES: usize = 64;
 pub type Chord = Vec<Task, MAX_TASKS>;
 type TaskHeap = BinaryHeap<Task, Min, MAX_TASKS>;
 pub type QueueMap =
-    LinearMap<&'static str, MpMcQueue<&'static str, MAX_QUEUE_MESSAGES>, MAX_QUEUES>;
+    FnvIndexMap<&'static str, MpMcQueue<&'static str, MAX_QUEUE_MESSAGES>, MAX_QUEUES>;
 
 pub struct Scheduler {
     tasks: TaskHeap,

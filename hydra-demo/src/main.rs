@@ -3,8 +3,7 @@ use hydra_core::scheduler::Chord;
 use hydra_core::state::State;
 use hydra_core::{scheduler::Scheduler, task::Task};
 
-fn main() {
-    let task_a: Task = Task::new(
+const TASK_A: Task = Task::new(
         "Task A",
         Task::DEFAULT_PRIORITY,
         State::EmptyState,
@@ -14,7 +13,7 @@ fn main() {
                 None => return true,
             };
 
-            msg_queue.len() == 0
+           msg_queue.is_empty() 
         },
         |t, queues| {
             let msg_queue = match queues.get("msg") {
@@ -30,6 +29,7 @@ fn main() {
         },
     );
 
+fn main() {
     let task_b: Task = Task::new(
         "Task B",
         Task::DEFAULT_PRIORITY,
@@ -40,7 +40,7 @@ fn main() {
                 None => return false,
             };
 
-            msg_queue.len() >= 1
+            !msg_queue.is_empty()
         },
         |t, queues| {
             let msg_queue = match queues.get("msg") {
@@ -62,7 +62,7 @@ fn main() {
     );
 
     let mut c: Chord = Chord::new();
-    c.push(task_a).unwrap();
+    c.push(TASK_A).unwrap();
     c.push(task_b).unwrap();
 
     let mut s: Scheduler = Scheduler::new(c);
