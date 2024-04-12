@@ -6,3 +6,24 @@ pub enum State {
     SignedState(i64),
     BoolState(bool),
 }
+
+impl From<u64> for State {
+    #[inline(always)]
+    fn from(value: u64) -> Self {
+        Self::UnsignedState(value)
+    }
+}
+
+impl From<i64> for State {
+    #[inline(always)]
+    fn from(value: i64) -> Self {
+        Self::SignedState(value)
+    }
+}
+
+impl From<bool> for State {
+    #[inline(always)]
+    fn from(value: bool) -> Self {
+        Self::BoolState(value)
+    }
+}
