@@ -18,7 +18,7 @@ const TASK_A: Task = Task::new(
             None => return true,
         };
 
-        msg_queue.is_empty() && Time::get() >= task.last_ran + 1000
+        msg_queue.is_empty() && Time::wait_until(task.last_ran, Duration::from_millis(1000))
     },
     |t, queues| {
         let msg_queue = match queues.get("msg") {
@@ -38,7 +38,7 @@ fn main() {
     // Emulating the SysTick Timer.
     // Sets Time on 1 Millisecond Intervals.
     thread::spawn(|| loop {
-        thread::sleep(Duration::new(0, 1000000));
+        thread::sleep(Duration::from_millis(1));
         Time::increment();
     });
 
@@ -64,11 +64,9 @@ fn main() {
             };
 
             let msg = msg_queue.dequeue().unwrap_or("");
-            println!("Hola from {:} (Message: {:})", t.name, msg);
-            if t.state == State::BoolState(false) {
-                t.state = State::BoolState(true);
-            } else {
-                t.state = State::BoolState(false);
+            println!("Hola from {:} (Message: {:}) (State: {:?})", t.name, msg, t.state);
+            if let State::BoolState(state) = t.state {
+                t.state = State::from(!state);
             }
         },
     );
