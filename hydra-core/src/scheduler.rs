@@ -8,8 +8,25 @@ pub const MAX_QUEUES: usize = 64;
 pub const MAX_QUEUE_MESSAGES: usize = 64;
 
 pub type Chord = Vec<Task, MAX_TASKS>;
-type TaskHeap = BinaryHeap<Task, Min, MAX_TASKS>;
 
+#[macro_export]
+macro_rules! chord {
+    ($tasks: expr) => {{
+        use $crate::scheduler::MAX_TASKS;
+        use $crate::scheduler::Chord;
+
+        let mut chord = Chord::new();
+        const _: () = assert!($tasks.len() <= MAX_TASKS, "Maximum number of tasks is 64");
+
+        for task in $tasks {
+            chord.push(task).unwrap();
+        }
+
+        chord
+    }};
+}
+
+type TaskHeap = BinaryHeap<Task, Min, MAX_TASKS>;
 // SUPER IMPORTANT NOTE: IndexMap is broken for some reason when we try to use it here.
 pub type QueueMap =
     LinearMap<&'static str, MpMcQueue<&'static str, MAX_QUEUE_MESSAGES>, MAX_QUEUES>;
