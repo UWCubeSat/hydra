@@ -8,6 +8,11 @@ name = "hydra"
 test = false
 bench = false
 
+[profile.flash]
+inherits = "release"
+strip = true
+lto = true
+
 [dependencies]
 hydra-core = { version = "0.1", path = "../hydra-core"}
 embedded-hal = "0.2"
