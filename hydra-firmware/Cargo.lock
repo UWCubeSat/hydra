@@ -175,9 +175,10 @@ dependencies = [
 [[package]]
 name = "heapless"
 version = "0.8.0"
-source = "git+https://github.com/mistermuki/heapless.git?branch=main#b5b12a52b3249cef534e9e0579a2030f72f49294"
+source = "git+https://github.com/mistermuki/heapless.git?branch=main#9a8bdd891b68e23dfc6b3f08494159482d2ed97d"
 dependencies = [
  "hash32",
+ "portable-atomic",
  "stable_deref_trait",
 ]
 
@@ -188,7 +189,6 @@ dependencies = [
  "cortex-m",
  "cortex-m-rt",
  "embedded-hal 0.2.7",
- "heapless",
  "hydra-core",
  "nb 1.1.0",
  "panic-halt",
@@ -228,6 +228,12 @@ name = "panic-halt"
 version = "0.2.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "de96540e0ebde571dc55c73d60ef407c653844e6f9a1e2fdbd40c07b9252d812"
+
+[[package]]
+name = "portable-atomic"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
 
 [[package]]
 name = "powerfmt"

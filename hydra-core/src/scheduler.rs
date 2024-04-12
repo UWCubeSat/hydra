@@ -1,5 +1,7 @@
+use crate::time::Time;
+
 use super::task::Task;
-use heapless::{binary_heap::Min, mpmc::MpMcQueue, BinaryHeap, FnvIndexMap, Vec};
+use heapless::{binary_heap::Min, mpmc::MpMcQueue, BinaryHeap, LinearMap, Vec};
 
 pub const MAX_TASKS: usize = 64;
 pub const MAX_QUEUES: usize = 64;
@@ -7,8 +9,10 @@ pub const MAX_QUEUE_MESSAGES: usize = 64;
 
 pub type Chord = Vec<Task, MAX_TASKS>;
 type TaskHeap = BinaryHeap<Task, Min, MAX_TASKS>;
+
+// SUPER IMPORTANT NOTE: IndexMap is broken for some reason when we try to use it here.
 pub type QueueMap =
-    FnvIndexMap<&'static str, MpMcQueue<&'static str, MAX_QUEUE_MESSAGES>, MAX_QUEUES>;
+    LinearMap<&'static str, MpMcQueue<&'static str, MAX_QUEUE_MESSAGES>, MAX_QUEUES>;
 
 pub struct Scheduler {
     tasks: TaskHeap,
@@ -43,7 +47,7 @@ impl Scheduler {
                     }
 
                     task.execute(&mut self.queues);
-                    task.last_ran += 1;
+                    task.last_ran = Time::get();
                     next_tasks.push(task).unwrap();
                     break;
                 }

@@ -114,9 +114,10 @@ dependencies = [
 [[package]]
 name = "heapless"
 version = "0.8.0"
-source = "git+https://github.com/mistermuki/heapless.git?branch=main#005abbc4e66d1db0674364a8107649f681235437"
+source = "git+https://github.com/mistermuki/heapless.git?branch=main#9a8bdd891b68e23dfc6b3f08494159482d2ed97d"
 dependencies = [
  "hash32",
+ "portable-atomic",
  "stable_deref_trait",
 ]
 
@@ -141,6 +142,12 @@ dependencies = [
  "heapless",
  "hydra-core",
 ]
+
+[[package]]
+name = "portable-atomic"
+version = "1.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "7170ef9988bc169ba16dd36a7fa041e5c4cbeb6a35b76d4c03daded371eae7c0"
 
 [[package]]
 name = "proc-macro2"

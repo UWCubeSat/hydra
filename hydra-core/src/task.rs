@@ -15,7 +15,7 @@ pub struct Task {
     pub name: &'static str,
     pub state: State,
     priority: usize,
-    pub last_ran: usize,
+    pub last_ran: u64, 
     predicate: fn(&Task, &QueueMap) -> bool,
     func: fn(&mut Task, &mut QueueMap) -> (),
 }

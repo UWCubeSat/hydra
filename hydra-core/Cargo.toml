@@ -9,5 +9,4 @@ bench = false
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 [dependencies]
-heapless = { git = "https://github.com/mistermuki/heapless.git", branch = "main"} 
-#heapless = "0.8.0"
+heapless = { git = "https://github.com/mistermuki/heapless.git", branch = "main", features = ['portable-atomic']}

@@ -3,14 +3,18 @@ name = "hydra"
 version = "0.1.0"
 edition = "2021"
 
+[[bin]]
+name = "hydra"
+test = false
+bench = false
+
 [dependencies]
-hydra-core = { version = "0.1", path = "../hydra-core" }
+hydra-core = { version = "0.1", path = "../hydra-core"}
 embedded-hal = "0.2"
 nb = "1"
 cortex-m = "0.7"
 cortex-m-rt = "0.7"
 panic-halt = "0.2"
-heapless = { git = "https://github.com/mistermuki/heapless.git", branch = "main" } 
 
 [dependencies.stm32f4xx-hal]
 version = "0.18.0"

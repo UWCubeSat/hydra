@@ -1,3 +1,5 @@
 #!/bin/bash
 
-st-flash write ./target/thumbv7m-none-eabi/debug/hydra 0x08000000
+# Currently not working.
+# To flash the chip, use GDB load with ST Utils
+st-flash write ./target/thumbv7em-none-eabihf/debug/hydra 0x08000000
